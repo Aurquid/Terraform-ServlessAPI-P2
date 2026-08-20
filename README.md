@@ -50,7 +50,15 @@
 * terraform apply
 
 # IAM Least Privilege
-  
+This section describes how permissions are restricted within the AWS account to follow the principle of least privilege.
+
+* **Lambda Execution Role**: The `tfp2-lambda-exec-role` grants only the permissions required for CloudWatch logging and DynamoDB access.  
+ * **Policy Attachments**:  
+   `AWSLambdaBasicExecutionRole` enables log creation and event publishing to CloudWatch.  
+   `AmazonDynamoDBFullAccess` allows read/write operations on DynamoDB tables used by the API.  
+* **Cognito Context**: Cognito manages authentication for external users, while IAM controls what AWS resources those authenticated identities can access. Even though all resources are under one account, Cognito users receive temporary credentials mapped to IAM roles with limited permissions.  
+* **Security Principle**: No wildcard actions (`*`) are used; each policy specifies exact resources and actions. This minimizes exposure and ensures Lambda and Cognito operate with only the privileges they need.
+
 #  Tradeoff Analysis
 This section explains the architectural decisions and their tradeoffs.
 
@@ -73,7 +81,7 @@ This section explains the architectural decisions and their tradeoffs.
 # Architecture Tradeoffs
 # FinOps Recommendations
 # Future Improvements
-# Failure Scenario and Recovery Playbook
+# Failure Scenario & Recovery Playbook
 ### Scenario : 
 ### Root Cause: 
 ###  Recovery Steps:
