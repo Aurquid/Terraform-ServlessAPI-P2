@@ -44,14 +44,14 @@
 ##  Folder Structure
      
 
-   # Deployment
+  # Deployment
 * terraform init
 * terraform plan
 * terraform apply
 
-  # IAM Least Privilege
+# IAM Least Privilege
   
-  #  Tradeoff Analysis
+#  Tradeoff Analysis
 This section explains the architectural decisions and their tradeoffs.
 
 
