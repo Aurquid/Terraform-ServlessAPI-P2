@@ -13,6 +13,11 @@
 * [IAM Least Privilege](#iam-least-privilege)
 * [Tradeoff Analysis](#tradeoff-analysis)
 * [Cost Breakdown](#cost-breakdown)
+* [Cost Analysis](#cost-analysis)
+* [Cost & Security Considerations](#cost--security-considerations)
+* [Architecture Tradeoffs](#architecture-tradeoffs)
+* [FinOps Recommendations](#finops-recommendations)
+* [Future Improvements](#future-improvements)
 * [Failure Scenario & Recovery Playbook](#failure-scenario--recovery-playbook)
 * [Lessons Learned](#lessons-learned)
 * [Screenshots](#screenshots)
@@ -45,25 +50,8 @@
 * terraform apply
 
   # IAM Least Privilege
-  \
- 
-   # Failure Scenario and Recovery Playbook
-  ### Scenario : 
-  ### Root Cause: 
-  ###  Recovery Steps:
   
-   
-  ### Prevention:
-
- 
-  
-### Scenario:  
-### Root Cause: 
-### Recovery Steps:  
-
-### Prevention:
-
- ##  Tradeoff Analysis
+  #  Tradeoff Analysis
 This section explains the architectural decisions and their tradeoffs.
 
 
@@ -79,15 +67,29 @@ This section explains the architectural decisions and their tradeoffs.
 | CloudWatch Logs | ~$0.50 per GB ingested | Minimal for small workloads |
 | Data Transfer | variable | Depends on traffic volume |
 
+# Cost Analysis
 
-# Business Impact
+# Cost & Security Considerations
+# Architecture Tradeoffs
+# FinOps Recommendations
+# Future Improvements
+# Failure Scenario and Recovery Playbook
+### Scenario : 
+### Root Cause: 
+###  Recovery Steps:
+### Prevention:
+ 
+### Scenario:  
+### Root Cause: 
+### Recovery Steps:  
 
+### Prevention:
 
- # Lessons Learned
+# Lessons Learned
 
  
  
-  # Screenshots
+# Screenshots
   
 
 
