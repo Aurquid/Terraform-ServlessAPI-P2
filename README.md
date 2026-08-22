@@ -39,7 +39,14 @@
 
 
 # Services Used
-
+* AWS Lambda
+* API Gateway
+* DynamoDB
+* CloudWatch
+* Cognito
+* CloudFront
+* AWS WAF
+* IAM
   
 ##  Folder Structure
      
