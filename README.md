@@ -54,10 +54,10 @@ This section describes how permissions are restricted within the AWS account to 
 
 * **Lambda Execution Role**: The `tfp2-lambda-exec-role` grants only the permissions required for CloudWatch logging and DynamoDB access.  
  * **Policy Attachments**:  
-   `AWSLambdaBasicExecutionRole` enables log creation and event publishing to CloudWatch.  
+   `AWSLambdaBasicExecutionRole` allows log creation and event publishing to CloudWatch.  
    `AmazonDynamoDBFullAccess` allows read/write operations on DynamoDB tables used by the API.  
-* **Cognito Context**: Cognito manages authentication for external users, while IAM controls what AWS resources those authenticated identities can access. Even though all resources are under one account, Cognito users receive temporary credentials mapped to IAM roles with limited permissions.  
-* **Security Principle**: No wildcard actions are used; each policy specifies exact resources and actions it needs. This minimizes exposure and ensures Lambda and Cognito operate with only the privileges they need.
+* **Cognito Context**: Cognito manages authentication for external users, while IAM controls what AWS resources those authenticated identities can access. Even though all resources are under one account, Cognito users receive temporary credentials connected to IAM roles with limited permissions.  
+* **Security Principle**: Lambda only has access to logging and DynamoDB access. There is only access allowed only to what the API needs under least privilege. 
 
 #  Tradeoff Analysis
 This section explains the architectural decisions and their tradeoffs.
@@ -93,10 +93,36 @@ This section explains how the system costs incur under different usage levels an
 * Lower CloudWatch retention or filter logs to reduce ingestion.
 * Use DynamoDB GSIs to reduce expensive queries.
 # Cost & Security Considerations
+* **CloudWatch** log retention is kept at 14 days to keep storage costs low while providing sufficient information for debugging and audit needs.
+* **Cognito authentication** includes small expenses but prevents unauthorized API calls to reduce API costs
+*  **AWS WAF** protects the CloudFront layer from common web exploits with little impact on costs
+
+  ### Cost Decisions That Affect Security 
+* Avoiding advanced monitoring can lower costs but increases security exposure
+* Keeping log retention short can limit the availability of log information during incidents
+
 # Architecture Tradeoffs
+* **Lambda + API Gateway** removes operational overhead but limit control on networking, connections, and long-running jobs
+* **Serverless architecture** keeps costs low and scales automatically but makes incident analysis harder than with an EC2 or container environment
+* **CloudFront + WAF** combination protects against common web attacks but requires more configuration than an API Gateway by itself
+* **DynamoDB** scales automatically without provisioning but sustained high traffic can be more expensive than provisioned capacity
+  
 # FinOps Recommendations
-# Future Improvements
-# Failure Scenario & Recovery Playbook
+These recommendations focus on improving costs and optimization 
+* Utilize **AWS Cost Explorer and Budgets** to track Lambda, API Gateway, and DynamoDB usage and turn on alerts to track high costs
+* Add **CloudWatch dashboards** to keep track of request count, latency, and error alerts to identify issues
+* Use **Lambda Power Tuning** to identify the optimal memory configuration that minimizes cost with lowering quality performance
+* Research **API Gateway usage plans** and turn on API throttling to minimize costs during high volume requests
+* **Tag all resources** to keep track of cost allocation and and accuracy
+* **AWS Trusted Advisor and Compute Optimizer** to identify underutilized resources or misconfigured resources
+ # Future Suggestions for Improvements
+ * Add **automated backups and recovery** for DynamoDB to include resiliency 
+ * Add **multi-region replication**  for high availability and disaster recovery
+ * Add **CI/CD automation** with AWS CodePipeline for easier deployments and reduce manual
+   updates
+* Include **Terraform modules** for reusability in resources in order to use in other projects
+* Use **AWS Shield Advance** for stronger DDos protection
+# Failure Scenario & Recovery PlaybookC
 ### Scenario : 
 ### Root Cause: 
 ###  Recovery Steps:
