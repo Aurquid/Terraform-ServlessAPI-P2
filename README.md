@@ -111,7 +111,7 @@ This section explains how the system costs incur under different usage levels an
 These recommendations focus on improving costs and optimization 
 * Utilize **AWS Cost Explorer and Budgets** to track Lambda, API Gateway, and DynamoDB usage and turn on alerts to track high costs
 * Add **CloudWatch dashboards** to keep track of request count, latency, and error alerts to identify issues
-* Use **Lambda Power Tuning** to identify the optimal memory configuration that minimizes cost with lowering quality performance
+* Use **Lambda Power Tuning** to identify the optimal memory configuration that minimizes cost without lowering performance
 * Research **API Gateway usage plans** and turn on API throttling to minimize costs during high volume requests
 * **Tag all resources** to keep track of cost allocation and and accuracy
 * **AWS Trusted Advisor and Compute Optimizer** to identify underutilized resources or misconfigured resources
