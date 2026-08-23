@@ -27,15 +27,21 @@
 
 
 # Architecture Summary 
-* API Gateway (entry point)
+* API Gateway for entry point for client requests
 
-* Lambda (compute)
+* Lambda for serverless compute for backend logic
 
-* DynamoDB (data layer)
+* DynamoDB NoSQL database for storage
 
-* CloudWatch (monitoring)
+* CloudFront for content delivery and caching8
+  
+* WAF for protecting CloudFront
 
-* IAM (permissions)
+* Cognito for user authentication and authorization
+
+* CloudWatch to record logging, metrics, and alarms for monitoring
+
+* IAM controls for least privilege for AWS resources 
 
 
 # Services Used
@@ -129,21 +135,37 @@ These recommendations focus on improving costs and optimization
    updates
 * Include **Terraform modules** for reusability in resources in order to use in other projects
 * Use **AWS Shield Advance** for stronger DDos protection
-# Failure Scenario & Recovery PlaybookC
+# Failure Scenario & Recovery Playbook
 ### Scenario : 
+Lambda Function Failure
 ### Root Cause: 
+Lambda function is missing environment variables or IAM permissions
 ###  Recovery Steps:
+1. Check CloudWatch logs for errors and stack traces
+2. Verify IAM permissions for DynamoDB read/write access
+3. Redeploy Lambda with correct environment variables or updated policy
+4. Run test events to validate changes
 ### Prevention:
- 
+ * Add CI/CD validation for environment variables and IAM permissions before deployment
 ### Scenario:  
+DynamoDB denied access
 ### Root Cause: 
+Lambda function fails to read or write data due to lack of DynamoDB permissions
 ### Recovery Steps:  
+1. Check CloudWatch logs for denied access errors
+2. Review Lambda execution role policy for missing permissions
+3. Update IAM policy and redeploy Lambda functions
+4. Run test events again to verify permissions
 
 ### Prevention:
+* Add CI/CD with IAM policy validation
 
 # Lessons Learned
-
- 
+* Validating IAM permissions early prevents Lambda errors and unnecessary debugging
+* CloudWatch logs and stack traces are important to identify root causes early
+* Least-privilege design is important for security and operational stability
+* Testing terraform blocks after changes helps ensure resource dependencies and help identify errors early
+* Documenting recovery steps and architecture decisions improves future troubleshooting 
  
 # Screenshots
   
