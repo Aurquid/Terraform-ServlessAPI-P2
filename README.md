@@ -38,8 +38,6 @@ This project deploys a fully serverless API architecture utilizing AWS Lambda, p
   
 * WAF for protecting CloudFront
 
-* Cognito for user authentication and authorization
-
 * CloudWatch to record logging, metrics, and alarms for monitoring
 
 * IAM controls for least privilege for AWS resources 
@@ -50,7 +48,6 @@ This project deploys a fully serverless API architecture utilizing AWS Lambda, p
 * API Gateway
 * DynamoDB
 * CloudWatch
-* Cognito
 * CloudFront
 * AWS WAF
 * IAM
@@ -69,16 +66,8 @@ This section describes how permissions are restricted within the AWS account to 
 * **Lambda Execution Role**: The `tfp2-lambda-exec-role` grants only the permissions required for CloudWatch logging and DynamoDB access.  
  * **Policy Attachments**:  
    `AWSLambdaBasicExecutionRole` allows log creation and event publishing to CloudWatch.  
-   `AmazonDynamoDBFullAccess` allows read/write operations on DynamoDB tables used by the API.  
-* **Cognito Context**: Cognito manages authentication for external users, while IAM controls what AWS resources those authenticated identities can access. Even though all resources are under one account, Cognito users receive temporary credentials connected to IAM roles with limited permissions.  
+   `AmazonDynamoDBFullAccess` allows read/write operations on DynamoDB tables used by the API.    
 * **Security Principle**: Lambda only has access to logging and DynamoDB access. There is only access allowed only to what the API needs under least privilege. 
-
-#  Tradeoff Analysis
-This section explains the architectural decisions and their tradeoffs.
-
-
-
-
 
 # Cost Breakdown 
 | Component | Cost | Notes |
@@ -88,7 +77,7 @@ This section explains the architectural decisions and their tradeoffs.
 | DynamoDB | ~$1.25 per GB storage | Scales automatically |
 | CloudWatch Logs | ~$0.50 per GB ingested +$.03 per gb of logs stored| Minimal for small workloads |
 | CloudFront|$0.085 per gb| regional rates vary|
-|Cognito| Free for 10k MAU| Includes authentication and token issuance|
+|Cognito| Free for 10k MAU| Cognito is provisioned but not activated to incur costs|
 |WAF| $5 per Web ACL + $1 per rule group + $0.60 per M requests| Minimal due to workload|
 | Data Transfer | variable | Depends on traffic volume |
 
@@ -101,7 +90,6 @@ This section explains how the system costs incur under different usage levels an
 * **DynamoDB On-Demand** scales with read/write operations, eliminating capacity planning but can increase costs based on API usage.
 * **CloudWatch Logs** incur  costs for ingestion and storage; retention is set to 14 days to avoid long-term storage.\
 * **CloudFront** caching reduces repeated requests and keep costs minimal for workload
-* **Cognito** costs depend on monthly users so its negligible for this project
 * **WAF** costs remain low due to low volume traffic
 
 ### Cost Risks
@@ -117,7 +105,6 @@ This section explains how the system costs incur under different usage levels an
 * Use DynamoDB GSIs to reduce expensive queries.
 # Cost & Security Considerations
 * **CloudWatch** log retention is kept at 14 days to keep storage costs low while providing sufficient information for debugging and audit needs.
-* **Cognito authentication** includes small expenses but prevents unauthorized API calls to reduce API costs
 *  **AWS WAF** protects the CloudFront layer from common web exploits with little impact on costs
 
   ### Cost Decisions That Affect Security 
