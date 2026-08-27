@@ -125,6 +125,7 @@ These recommendations focus on improving costs and optimization
 * Research **API Gateway usage plans** and turn on API throttling to minimize costs during high volume requests
 * **Tag all resources** to keep track of cost allocation and and accuracy
 * **AWS Trusted Advisor and Compute Optimizer** to identify underutilized resources or misconfigured resources
+  
  # Future Suggestions for Improvements
  * Add **automated backups and recovery** for DynamoDB to include resiliency 
  * Add **multi-region replication**  for high availability and disaster recovery
@@ -132,6 +133,8 @@ These recommendations focus on improving costs and optimization
    updates
 * Include **Terraform modules** for reusability in resources in order to use in other projects
 * Use **AWS Shield Advance** for stronger DDos protection
+* Attach **Cognito User Pool** with API Gateway Authorizers to enable user authentication and token issuance 
+  
 # Failure Scenario & Recovery Playbook
 ### Scenario : 
 Lambda Function Failure
