@@ -1,9 +1,10 @@
 # Terraform-ServerlessAPI
 # Overview
+This project deploys a fully serverless API architecture utilizing AWS Lambda, pi Gateway, DynamoDB, CloudFront, and WAF. Deployment is automated through Terraform, delivering a secure and scalable API with CloudWatch monitoring.
 
 
 
-# 📘 Table of Contents
+#  Table of Contents
 * [Overview](#overview)
 * [Architecture Diagram](#architecture-diagram)
 * [Architecture Summary](#architecture-summary)
