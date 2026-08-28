@@ -25,6 +25,7 @@ This project deploys a fully serverless API architecture utilizing AWS Lambda, p
 
 
 # Architecture Diagram
+[APip2v2.drawio.pdf](https://github.com/user-attachments/files/31546960/APip2v2.drawio.pdf)
 
 
 # Architecture Summary 
