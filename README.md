@@ -25,7 +25,7 @@ This project deploys a fully serverless API architecture utilizing AWS Lambda, p
 
 
 # Architecture Diagram
-
+P2v3.drawio.pdf
 
 # Architecture Summary 
 * API Gateway for entry point for client requests
