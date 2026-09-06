@@ -53,9 +53,7 @@ This project deploys a fully serverless API architecture utilizing AWS Lambda, p
 * AWS WAF
 * IAM
   
-##  Folder Structure
      
-
   # Deployment
 * terraform init
 * terraform plan
@@ -68,7 +66,7 @@ This section describes how permissions are restricted within the AWS account to 
  * **Policy Attachments**:  
    `AWSLambdaBasicExecutionRole` allows log creation and event publishing to CloudWatch.  
    `AmazonDynamoDBFullAccess` allows read/write operations on DynamoDB tables used by the API.    
-* **Security Principle**: Lambda only has access to logging and DynamoDB access. There is only access allowed only to what the API needs under least privilege. 
+* **Security Principle**: Lambda only has access to logging and DynamoDB access based on least-privilege 
 
 # Cost Breakdown 
 | Component | Cost | Notes |
@@ -97,13 +95,12 @@ This section explains how the system costs incur under different usage levels an
 * High-volume logging can increase CloudWatch ingestion cost
 * DynamoDB may cause high costs in read/write usage
 * API Gateway costs are based on traffic
-* Large data transfer volume can increase costs can raise CDN fees for CloudFront
-* Costs rise for Cognito if user base increases past free tier
-* WAF costs increase for every additional managed rule group or high requests based on traffic
+* Large data transfer volume  can raise CDN fees for CloudFront
+* Costs rise once usage passes free tier 
+* Additional WAF rule groups increase costs 
 
 ### Optimization Levers
 * Lower CloudWatch retention or filter logs to reduce ingestion.
-* Use DynamoDB GSIs to reduce expensive queries.
 # Cost & Security Considerations
 * **CloudWatch** log retention is kept at 14 days to keep storage costs low while providing sufficient information for debugging and audit needs.
 *  **AWS WAF** protects the CloudFront layer from common web exploits with little impact on costs
