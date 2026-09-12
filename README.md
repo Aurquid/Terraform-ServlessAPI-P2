@@ -1,6 +1,6 @@
 # Terraform-ServerlessAPI
 # Overview
-This project deploys a fully serverless API architecture utilizing AWS Lambda, pi Gateway, DynamoDB, CloudFront, and WAF. Deployment is automated through Terraform, delivering a secure and scalable API with CloudWatch monitoring.
+This project deploys a fully serverless API architecture utilizing AWS Lambda, API Gateway, DynamoDB, CloudFront, and WAF. Deployment is automated through Terraform, delivering a secure and scalable API with CloudWatch monitoring.
 
 
 
@@ -35,7 +35,7 @@ This project deploys a fully serverless API architecture utilizing AWS Lambda, p
 
 * DynamoDB NoSQL database for storage
 
-* CloudFront for content delivery and caching8
+* CloudFront for content delivery and caching
   
 * WAF for protecting CloudFront
 
@@ -121,7 +121,7 @@ These recommendations focus on improving costs and optimization
 * Add **CloudWatch dashboards** to keep track of request count, latency, and error alerts to identify issues
 * Use **Lambda Power Tuning** to identify the optimal memory configuration that minimizes cost without lowering performance
 * Research **API Gateway usage plans** and turn on API throttling to minimize costs during high volume requests
-* **Tag all resources** to keep track of cost allocation and and accuracy
+* **Tag all resources** to keep track of cost allocation and  accuracy
 * **AWS Trusted Advisor and Compute Optimizer** to identify underutilized resources or misconfigured resources
   
  # Future Suggestions for Improvements
@@ -130,7 +130,7 @@ These recommendations focus on improving costs and optimization
  * Add **CI/CD automation** with AWS CodePipeline for easier deployments and reduce manual
    updates
 * Include **Terraform modules** for reusability in resources in order to use in other projects
-* Use **AWS Shield Advance** for stronger DDos protection
+* Use **AWS Shield Advanced** for stronger DDos protection
 * Attach **Cognito User Pool** with API Gateway Authorizers to enable user authentication and token issuance 
   
 # Failure Scenario & Recovery Playbook
