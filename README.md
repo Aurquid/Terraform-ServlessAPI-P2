@@ -9,7 +9,6 @@ This project deploys a fully serverless API architecture utilizing AWS Lambda, A
 * [Architecture Diagram](#architecture-diagram)
 * [Architecture Summary](#architecture-summary)
 * [Services Used](#services-used)
-* [Folder Structure](#folder-structure)
 * [Deployment](#deployment)
 * [IAM Least Privilege](#iam-least-privilege)
 * [Tradeoff Analysis](#tradeoff-analysis)
