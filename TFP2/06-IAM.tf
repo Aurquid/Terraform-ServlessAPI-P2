@@ -20,8 +20,4 @@ resource "aws_iam_role_policy_attachment" "lambda_basic_execution" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
-# Attach DynamoDB access policy
-resource "aws_iam_role_policy_attachment" "lambda_dynamodb_access" {
-  role       = aws_iam_role.lambda_exec_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
-}
+# DynamoDB access comes from the scoped policy in 11-Dynamodb.tf
