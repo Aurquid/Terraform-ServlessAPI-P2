@@ -34,9 +34,9 @@ This project deploys a fully serverless API architecture utilizing AWS Lambda, A
 
 * DynamoDB NoSQL database for storage
 
-* CloudFront for content delivery and caching
+* CloudFront as the public HTTPS entry point (caching disabled for API responses)
   
-* WAF for protecting CloudFront
+* WAF attached to CloudFront to filter requests before they reach API Gateway
 
 * CloudWatch to record logging, metrics, and alarms for monitoring
 
@@ -64,7 +64,7 @@ This section describes how permissions are restricted within the AWS account to 
 * **Lambda Execution Role**: The `tfp2-lambda-exec-role` grants only the permissions required for CloudWatch logging and DynamoDB access.  
  * **Policy Attachments**:  
    `AWSLambdaBasicExecutionRole` allows log creation and event publishing to CloudWatch.  
-   `AmazonDynamoDBFullAccess` allows read/write operations on DynamoDB tables used by the API.    
+   `tfp2-dynamodb-policy` (custom) allows only PutItem, GetItem, UpdateItem, DeleteItem, Query and Scan on the `tfp2-table` table.  
 * **Security Principle**: Lambda only has access to logging and DynamoDB access based on least-privilege 
 
 # Cost Breakdown 
@@ -87,7 +87,7 @@ This section explains how the system costs incur under different usage levels an
 * **API Gateway** charges are made per API call, which can be the primary cost driver under heavy usage.
 * **DynamoDB On-Demand** scales with read/write operations, eliminating capacity planning but can increase costs based on API usage.
 * **CloudWatch Logs** incur  costs for ingestion and storage; retention is set to 14 days to avoid long-term storage.\
-* **CloudFront** caching reduces repeated requests and keep costs minimal for workload
+* **CloudFront** data transfer from API Gateway is free; caching is disabled so API responses are always current
 * **WAF** costs remain low due to low volume traffic
 
 ### Cost Risks
